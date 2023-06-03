@@ -45,6 +45,35 @@ class PayStackAPI():
         }
         response = requests.post(endpoint, json=data, headers=self.headers()).json()
         return response
+    
+    def update_customer(self,code, first_name:str,last_name:str,phone:str):
+        url = f'https://api.paystack.co/customer/{code}'
+        data = {
+            'first_name': first_name,
+            'last_name': last_name,
+            "phone":phone
+        }
+        response = requests.put(url, headers=self.headers(), json=data)
+        response_json = response.json()
+        return response_json
+    
+    
+    def create_payment_request(self, description, line_items, tax, customer, due_date):
+        url = 'https://api.paystack.co/paymentrequest'
+        headers = {
+            'Authorization': f'Bearer {self.secret_key}',
+            'Content-Type': 'application/json'
+        }
+        data = {
+            'description': description,
+            'line_items': line_items,
+            'tax': tax,
+            'customer': customer,
+            'due_date': due_date
+        }
+        response = requests.post(url, headers=self.headers(), json=data)
+        response_json = response.json()
+        return response_json
 
     def show_customer_list(self):
         endpoint = f"{self.BASE_URL}/customer"
