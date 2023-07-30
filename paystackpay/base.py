@@ -15,11 +15,13 @@ class Base(object):
         
 
 
-    def headers(self):
-        return {
-            "Authorization": f"Bearer {self.secret_key}",
-            "Content-Type": "application/json"
+    def headers(self,data=None):
+        header = {
+            "Authorization": f"Bearer {self.secret_key}"
         }
+        if data:
+            header['Content-Type'] = "application/json"
+        return header
 
     def make_request(self, method, endpoint, data=None,params=None):
         methods = {
@@ -35,7 +37,7 @@ class Base(object):
         
         url = f"{self.BASE_URL}/{endpoint}"
         try:
-            response = request_method(url,headers=self.headers(),json=data)
+            response = request_method(url,headers=self.headers(data=data),json=data)
             response.raise_for_status()
             response_json = response.json()
             return response_json

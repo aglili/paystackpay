@@ -19,9 +19,17 @@ class Transaction(Base):
     def verify_transaction(self,reference):
         endpoint = f"/transaction/verify/{reference}"
 
-        return self.make_request("POST",endpoint=endpoint)
+        return self.make_request("GET",endpoint=endpoint)
     
 
     def transaction_list(self):
         endpoint = 'transaction/'
         return self.make_request("GET",endpoint=endpoint)
+    
+
+    def fetch_transaction(self,transaction_id):
+        endpoint = f"/transaction/{transaction_id}"
+        return self.make_request("GET",endpoint=endpoint)
+    
+
+    
