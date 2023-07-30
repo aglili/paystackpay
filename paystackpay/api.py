@@ -1,5 +1,7 @@
 import requests
 from pydantic import EmailStr
+from .utils import validate_amount
+from .errors import InvalidDataErr
 
 class PayStackAPI():
 
@@ -60,10 +62,6 @@ class PayStackAPI():
     
     def create_payment_request(self, description, line_items, tax, customer, due_date):
         url = 'https://api.paystack.co/paymentrequest'
-        headers = {
-            'Authorization': f'Bearer {self.secret_key}',
-            'Content-Type': 'application/json'
-        }
         data = {
             'description': description,
             'line_items': line_items,
@@ -81,12 +79,24 @@ class PayStackAPI():
         return response
         
     def pay_customer(self, amount:float, recipient:str, reason:str):
+        if not amount:
+            raise InvalidDataErr("Amount is Needed")
+        
+        validated_amount = validate_amount(amount=amount)
+        
+        if not recipient:
+            raise InvalidDataErr("A Recipient is Needed")
+        
+        if not reason:
+            raise InvalidDataErr("Reason for Transaction is Needed")
+
         endpoint = f"{self.BASE_URL}/transfer"
         data = {
             "source": "balance",
             "reason": reason,
-            "amount":100 * amount,
+            "amount":100 * validated_amount,
             "recipient": recipient
         }
+
         response = requests.post(endpoint, json=data, headers=self.headers()).json()
         return response
