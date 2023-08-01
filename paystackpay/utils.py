@@ -1,4 +1,4 @@
-from errors import InvalidDataErr
+from .errors import InvalidDataErr
 
 def validate_amount(amount):
     if not amount:
