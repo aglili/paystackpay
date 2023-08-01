@@ -20,3 +20,19 @@ class Transaction(Base):
         }
 
         return self.make_request("POST",endpoint=endpoint,data=data)
+    
+
+    def finalize_transfer(self,transfer_code:str,otp:str):
+        endpoint = '/transfer/finalize_transfer'
+        data  = {
+            "transfer_code":transfer_code,
+            "otp":otp
+        }
+        return self.make_request("POST",endpoint=endpoint,data=data)
+    
+    def fetch_transfer(self,transfer_id:str):
+        endpoint = f"/transfer/{transfer_id}"
+        return self.make_request("GET",endpoint=endpoint)
+    
+
+

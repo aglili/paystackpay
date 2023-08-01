@@ -5,10 +5,13 @@ from .utils import validate_amount
 class Plan(Base):
 
 
-    def create_plan(self,plan_name:str,interval:str,amount:float):
+    def create_plan(self,plan_name:str,interval:str,amount:float,currency:str):
         endpoint = "/plan"
 
-        validated_amount = validate_amount(amount)*100
+        if currency == "GHS":
+            amount = amount*100
+
+        validated_amount = validate_amount(amount)
 
         data = {
             "name":plan_name,

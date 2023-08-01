@@ -4,7 +4,7 @@ from pydantic import EmailStr
 class Customer(Base):
 
     def create_customer(self,email:EmailStr,first_name:str,last_name:str,phone:str):
-        endpoint = '/customer'
+        endpoint = 'customer'
         data = {
             "email":email,
             "first_name":first_name,
@@ -12,20 +12,22 @@ class Customer(Base):
             "phone": phone
         }
 
+
         return self.make_request("POST",endpoint=endpoint,data=data)
+    
     
 
     def list_costumers(self):
-        endpoint = '/customer'
+        endpoint = 'customer'
         return self.make_request("GET",endpoint=endpoint)
     
 
     def fetch_customer(self,email_or_customer_code:str):
-        endpoint = f"/customer/{email_or_customer_code}"
+        endpoint = f"customer/{email_or_customer_code}"
         return self.make_request("GET",endpoint=endpoint)
     
     def update_customer(self,customer_code:str,first_name:str=None,last_name:str=None,email:EmailStr=None,phone=None):
-        endpoint = f"/customer/{customer_code}"
+        endpoint = f"customer/{customer_code}"
 
         data = {}
 
@@ -63,7 +65,7 @@ class Customer(Base):
         return self.make_request("POST",endpoint=endpoint,data=data)
     
     def deactivate_auth(self,auth_code:str):
-        endpoint = "/customer/deactivate_authorization"
+        endpoint = "customer/deactivate_authorization"
 
         data = {
             "authorization_code":auth_code
