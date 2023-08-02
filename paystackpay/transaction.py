@@ -4,19 +4,26 @@ from .utils import validate_amount
 
 class Transaction(Base):
     
-    def initialize_transaction(self,email:EmailStr,amount:float):
+    def initialize_transaction(self,email:EmailStr,amount:float,currency:str):
         endpoint = 'transaction/initialize'
-        validated_amount = validate_amount(amount)*100
+
+        if currency == "GHS":
+            validated_amount = validate_amount(amount)*100
+        else:
+            validated_amount = validate_amount(amount)
+
+        
 
         data = {
             "email":email,
-            "amount":str(validated_amount)
+            "amount":str(validated_amount),
+            "currency":currency
         }
 
         return self.make_request("POST",endpoint=endpoint,data=data)
     
 
-    def verify_transaction(self,reference):
+    def verify_transaction(self,reference:str):
         endpoint = f"/transaction/verify/{reference}"
 
         return self.make_request("GET",endpoint=endpoint)
