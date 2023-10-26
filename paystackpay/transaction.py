@@ -34,7 +34,7 @@ class Transaction(Base):
         return self.make_request("GET",endpoint=endpoint)
     
 
-    def fetch_transaction(self,transaction_id):
+    def fetch_transaction(self,transaction_id:str):
         endpoint = f"/transaction/{transaction_id}"
         return self.make_request("GET",endpoint=endpoint)
     
@@ -52,7 +52,7 @@ class Transaction(Base):
 
         return self.make_request("POST",endpoint=endpoint,data=data)
 
-    def view_transaction_timeline(self,tran_id_reference):
+    def view_transaction_timeline(self,tran_id_reference:str):
         endpoint = f"/transaction/timeline/{tran_id_reference}"
         return self.make_request("GET",endpoint=endpoint)
     
@@ -78,6 +78,11 @@ class Transaction(Base):
         }
 
         return self.make_request("POST",endpoint=endpoint,data=data)
+    
+
+
+
+
     
 
 
