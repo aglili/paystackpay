@@ -11,16 +11,11 @@ class Customer(Base):
             "last_name":last_name,
             "phone": phone
         }
-
-
         return self.make_request("POST",endpoint=endpoint,data=data)
-    
-    
 
     def list_costumers(self):
         endpoint = 'customer'
-        return self.make_request("GET",endpoint=endpoint)
-    
+        return self.make_request("GET",endpoint=endpoint)    
 
     def fetch_customer(self,email_or_customer_code:str):
         endpoint = f"customer/{email_or_customer_code}"

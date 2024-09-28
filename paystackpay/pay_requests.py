@@ -35,7 +35,7 @@ class PaymentRequest(Base):
     
     def send_notification(self,request_code:str):
         endpoint = f"paymentrequest/notify/{request_code}"
-        return self.make_request("GET",endpoint=endpoint)
+        return self.make_request("POST",endpoint=endpoint)
     
 
 
