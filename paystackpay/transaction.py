@@ -78,14 +78,3 @@ class Transaction(Base):
         }
 
         return self.make_request("POST",endpoint=endpoint,data=data)
-    
-
-
-
-
-    
-
-
-
-
-

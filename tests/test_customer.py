@@ -76,7 +76,6 @@ class TestCustomer(unittest.TestCase):
         self.assertEqual(response["data"]["last_name"], last_name)
         self.assertEqual(response["data"]["customer_code"], customer_code)
 
-
     ## the endpoint for these two does not exist
     # def test_whitelist_customer(self):
     #     customer_code = "CUS_ng9mw56ma4cx6x9"

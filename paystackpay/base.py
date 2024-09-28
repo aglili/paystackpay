@@ -43,5 +43,3 @@ class Base(object):
             return response_json
         except requests.exceptions.RequestException as e:
             raise Exception(f"error: {str(e)}")
-        
-        
