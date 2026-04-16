@@ -4,6 +4,7 @@ from ..utils import to_subunit
 
 class Transfers(BaseResource):
     def initiate(self, amount: float, recipient: str, reason: str, currency: str = "GHS") -> dict:
+        """Initiate a transfer to a saved recipient. recipient is the recipient code."""
         data = {
             "source": "balance",
             "amount": to_subunit(amount, currency),
@@ -13,14 +14,17 @@ class Transfers(BaseResource):
         return self._client.request("POST", "/transfer", json=data)
 
     def finalize(self, transfer_code: str, otp: str) -> dict:
+        """Finalize a transfer that requires OTP confirmation."""
         return self._client.request(
             "POST", "/transfer/finalize_transfer", json={"transfer_code": transfer_code, "otp": otp}
         )
 
     def fetch(self, id_or_code: str) -> dict:
+        """Fetch details of a transfer by its ID or transfer code."""
         return self._client.request("GET", f"/transfer/{id_or_code}")
 
     def list(self, **params) -> dict:
+        """List all transfers on your integration."""
         return self._client.request("GET", "/transfer", params=params)
 
 
@@ -28,6 +32,7 @@ class AsyncTransfers(AsyncBaseResource):
     async def initiate(
         self, amount: float, recipient: str, reason: str, currency: str = "GHS"
     ) -> dict:
+        """Initiate a transfer to a saved recipient. recipient is the recipient code."""
         data = {
             "source": "balance",
             "amount": to_subunit(amount, currency),
@@ -37,12 +42,15 @@ class AsyncTransfers(AsyncBaseResource):
         return await self._client.request("POST", "/transfer", json=data)
 
     async def finalize(self, transfer_code: str, otp: str) -> dict:
+        """Finalize a transfer that requires OTP confirmation."""
         return await self._client.request(
             "POST", "/transfer/finalize_transfer", json={"transfer_code": transfer_code, "otp": otp}
         )
 
     async def fetch(self, id_or_code: str) -> dict:
+        """Fetch details of a transfer by its ID or transfer code."""
         return await self._client.request("GET", f"/transfer/{id_or_code}")
 
     async def list(self, **params) -> dict:
+        """List all transfers on your integration."""
         return await self._client.request("GET", "/transfer", params=params)
