@@ -18,7 +18,7 @@ from .resources.transfer_recipients import AsyncTransferRecipients, TransferReci
 from .resources.transfers import AsyncTransfers, Transfers
 from .resources.webhooks import Webhooks
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 __all__ = [
     "Paystack",

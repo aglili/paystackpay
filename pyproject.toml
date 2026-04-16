@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "paystackpay"
-version = "1.0.0"
+version = "1.0.1"
 description = "A Python wrapper for the Paystack API"
 authors = [
     {name = "Aglili Selorm Cecil", email = "cecilselorm34@gmail.com"}
