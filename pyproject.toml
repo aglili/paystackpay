@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -26,6 +26,11 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
 ]
 
+[project.urls]
+Homepage = "https://github.com/aglili/paystackpay"
+Source = "https://github.com/aglili/paystackpay"
+"Bug Tracker" = "https://github.com/aglili/paystackpay/issues"
+
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0",
@@ -33,6 +38,11 @@ dev = [
     "respx>=0.21",
     "python-dotenv>=1.0",
 ]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["paystackpay*"]
+exclude = ["tests*"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
