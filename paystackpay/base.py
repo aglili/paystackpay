@@ -1,5 +1,5 @@
 import requests
-from .errors import MissingAPIKeyErr,WrongMethodErr
+from .errors import MissingSecretKeyError,APIError
 
 
 
@@ -9,7 +9,7 @@ class Base(object):
 
     def __init__(self,secret_key) -> None:
         if not secret_key:
-            raise MissingAPIKeyErr("Your API_KEY is missing")
+            raise MissingSecretKeyError("Your API_KEY is missing")
         self.secret_key = secret_key
 
         
@@ -33,7 +33,7 @@ class Base(object):
         request_method = methods.get(method)
 
         if not request_method:
-            raise WrongMethodErr("HTTP method is wrong")
+            raise APIError("HTTP method is wrong")
         
         url = f"{self.BASE_URL}/{endpoint}"
         try:

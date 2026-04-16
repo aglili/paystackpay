@@ -34,10 +34,3 @@ class APIError(PaystackError):
 class MissingSecretKeyError(PaystackError):
     pass
 
-
-# Backward compatibility aliases
-PayStackPayErr = PaystackError
-MissingAPIKeyErr = MissingSecretKeyError
-WrongMethodErr = APIError
-InvalidDataErr = InvalidRequestError
-
