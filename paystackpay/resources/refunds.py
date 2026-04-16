@@ -4,7 +4,7 @@ from ..utils import to_subunit
 
 class Refunds(BaseResource):
     def create(
-        self, transaction: str, amount: float | None = None, currency: str = "NGN", **kwargs
+        self, transaction: str, amount: float | None = None, currency: str = "GHS", **kwargs
     ) -> dict:
         data: dict = {"transaction": transaction, **kwargs}
         if amount is not None:
@@ -20,7 +20,7 @@ class Refunds(BaseResource):
 
 class AsyncRefunds(AsyncBaseResource):
     async def create(
-        self, transaction: str, amount: float | None = None, currency: str = "NGN", **kwargs
+        self, transaction: str, amount: float | None = None, currency: str = "GHS", **kwargs
     ) -> dict:
         data: dict = {"transaction": transaction, **kwargs}
         if amount is not None:

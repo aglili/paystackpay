@@ -3,7 +3,7 @@ from ..utils import to_subunit
 
 
 class Transactions(BaseResource):
-    def initialize(self, email: str, amount: float, currency: str = "NGN", **kwargs) -> dict:
+    def initialize(self, email: str, amount: float, currency: str = "GHS", **kwargs) -> dict:
         data = {
             "email": email,
             "amount": to_subunit(amount, currency),
@@ -22,7 +22,7 @@ class Transactions(BaseResource):
         return self._client.request("GET", f"/transaction/{transaction_id}")
 
     def charge_authorization(
-        self, email: str, amount: float, authorization_code: str, currency: str = "NGN", **kwargs
+        self, email: str, amount: float, authorization_code: str, currency: str = "GHS", **kwargs
     ) -> dict:
         data = {
             "email": email,
@@ -42,7 +42,7 @@ class Transactions(BaseResource):
         return self._client.request("GET", "/transaction/export", params=params)
 
     def partial_debit(
-        self, authorization_code: str, email: str, amount: float, currency: str = "NGN"
+        self, authorization_code: str, email: str, amount: float, currency: str = "GHS"
     ) -> dict:
         data = {
             "authorization_code": authorization_code,
@@ -54,7 +54,7 @@ class Transactions(BaseResource):
 
 
 class AsyncTransactions(AsyncBaseResource):
-    async def initialize(self, email: str, amount: float, currency: str = "NGN", **kwargs) -> dict:
+    async def initialize(self, email: str, amount: float, currency: str = "GHS", **kwargs) -> dict:
         data = {
             "email": email,
             "amount": to_subunit(amount, currency),
@@ -73,7 +73,7 @@ class AsyncTransactions(AsyncBaseResource):
         return await self._client.request("GET", f"/transaction/{transaction_id}")
 
     async def charge_authorization(
-        self, email: str, amount: float, authorization_code: str, currency: str = "NGN", **kwargs
+        self, email: str, amount: float, authorization_code: str, currency: str = "GHS", **kwargs
     ) -> dict:
         data = {
             "email": email,
@@ -93,7 +93,7 @@ class AsyncTransactions(AsyncBaseResource):
         return await self._client.request("GET", "/transaction/export", params=params)
 
     async def partial_debit(
-        self, authorization_code: str, email: str, amount: float, currency: str = "NGN"
+        self, authorization_code: str, email: str, amount: float, currency: str = "GHS"
     ) -> dict:
         data = {
             "authorization_code": authorization_code,

@@ -8,7 +8,7 @@ class TransferRecipients(BaseResource):
         name: str,
         account_number: str,
         bank_code: str,
-        currency: str = "NGN",
+        currency: str = "GHS",
         **kwargs,
     ) -> dict:
         data = {
@@ -46,7 +46,7 @@ class AsyncTransferRecipients(AsyncBaseResource):
         name: str,
         account_number: str,
         bank_code: str,
-        currency: str = "NGN",
+        currency: str = "GHS",
         **kwargs,
     ) -> dict:
         data = {

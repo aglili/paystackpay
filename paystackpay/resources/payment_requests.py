@@ -4,7 +4,7 @@ from ..utils import to_subunit
 
 class PaymentRequests(BaseResource):
     def create(
-        self, customer: str, description: str, amount: float, currency: str = "NGN", **kwargs
+        self, customer: str, description: str, amount: float, currency: str = "GHS", **kwargs
     ) -> dict:
         data = {
             "customer": customer,
@@ -30,7 +30,7 @@ class PaymentRequests(BaseResource):
 
 class AsyncPaymentRequests(AsyncBaseResource):
     async def create(
-        self, customer: str, description: str, amount: float, currency: str = "NGN", **kwargs
+        self, customer: str, description: str, amount: float, currency: str = "GHS", **kwargs
     ) -> dict:
         data = {
             "customer": customer,

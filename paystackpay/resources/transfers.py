@@ -3,7 +3,7 @@ from ..utils import to_subunit
 
 
 class Transfers(BaseResource):
-    def initiate(self, amount: float, recipient: str, reason: str, currency: str = "NGN") -> dict:
+    def initiate(self, amount: float, recipient: str, reason: str, currency: str = "GHS") -> dict:
         data = {
             "source": "balance",
             "amount": to_subunit(amount, currency),
@@ -26,7 +26,7 @@ class Transfers(BaseResource):
 
 class AsyncTransfers(AsyncBaseResource):
     async def initiate(
-        self, amount: float, recipient: str, reason: str, currency: str = "NGN"
+        self, amount: float, recipient: str, reason: str, currency: str = "GHS"
     ) -> dict:
         data = {
             "source": "balance",

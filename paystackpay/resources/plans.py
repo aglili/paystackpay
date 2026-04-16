@@ -3,7 +3,7 @@ from ..utils import to_subunit
 
 
 class Plans(BaseResource):
-    def create(self, name: str, interval: str, amount: float, currency: str = "NGN") -> dict:
+    def create(self, name: str, interval: str, amount: float, currency: str = "GHS") -> dict:
         data = {
             "name": name,
             "interval": interval,
@@ -24,7 +24,7 @@ class Plans(BaseResource):
         name: str | None = None,
         interval: str | None = None,
         amount: float | None = None,
-        currency: str = "NGN",
+        currency: str = "GHS",
     ) -> dict:
         data = {}
         if name is not None:
@@ -37,7 +37,7 @@ class Plans(BaseResource):
 
 
 class AsyncPlans(AsyncBaseResource):
-    async def create(self, name: str, interval: str, amount: float, currency: str = "NGN") -> dict:
+    async def create(self, name: str, interval: str, amount: float, currency: str = "GHS") -> dict:
         data = {
             "name": name,
             "interval": interval,
@@ -58,7 +58,7 @@ class AsyncPlans(AsyncBaseResource):
         name: str | None = None,
         interval: str | None = None,
         amount: float | None = None,
-        currency: str = "NGN",
+        currency: str = "GHS",
     ) -> dict:
         data = {}
         if name is not None:
