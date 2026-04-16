@@ -1,33 +1,43 @@
-class PayStackPayErr(Exception):
-    """
-    There is an Error
-    """
+class PaystackError(Exception):
+    def __init__(
+        self,
+        message: str,
+        status_code: int | None = None,
+        raw_response: dict | None = None,
+    ) -> None:
+        super().__init__(message)
+        self.message = message
+        self.status_code = status_code
+        self.raw_response = raw_response or {}
 
+
+class AuthenticationError(PaystackError):
     pass
 
 
-class MissingAPIKeyErr(PayStackPayErr):
-    """
-    API_KEY Cannot be Found
-    
-    """
-
+class InvalidRequestError(PaystackError):
     pass
 
 
-class WrongMethodErr(PayStackPayErr):
-    """
-    Wrong HTTP Method/Request
-    """
-
+class NotFoundError(PaystackError):
     pass
 
 
-class InvalidDataErr(PayStackPayErr):
-    """
-    Invalid or Wrong Input Received
-    """
-
+class RateLimitError(PaystackError):
     pass
 
+
+class APIError(PaystackError):
+    pass
+
+
+class MissingSecretKeyError(PaystackError):
+    pass
+
+
+# Backward compatibility aliases
+PayStackPayErr = PaystackError
+MissingAPIKeyErr = MissingSecretKeyError
+WrongMethodErr = APIError
+InvalidDataErr = InvalidRequestError
 
