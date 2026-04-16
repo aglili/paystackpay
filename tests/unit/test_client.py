@@ -1,13 +1,14 @@
-import pytest
 import httpx
+import pytest
 import respx
-from paystackpay._client import SyncClient, AsyncClient
+
+from paystackpay._client import AsyncClient, SyncClient
 from paystackpay.errors import (
+    APIError,
     AuthenticationError,
     InvalidRequestError,
     NotFoundError,
     RateLimitError,
-    APIError,
 )
 
 BASE = "https://api.paystack.co"

@@ -1,6 +1,7 @@
 import pytest
-from paystackpay.utils import to_subunit, validate_amount
+
 from paystackpay.errors import InvalidRequestError
+from paystackpay.utils import to_subunit, validate_amount
 
 
 def test_to_subunit_ghs():

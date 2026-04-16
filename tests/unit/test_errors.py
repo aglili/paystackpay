@@ -1,11 +1,11 @@
 from paystackpay.errors import (
-    PaystackError,
+    APIError,
     AuthenticationError,
     InvalidRequestError,
-    NotFoundError,
-    RateLimitError,
-    APIError,
     MissingSecretKeyError,
+    NotFoundError,
+    PaystackError,
+    RateLimitError,
 )
 
 

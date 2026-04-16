@@ -1,4 +1,4 @@
-from ._client import SyncClient, AsyncClient
+from ._client import AsyncClient, SyncClient
 
 
 class BaseResource:

@@ -1,10 +1,9 @@
 import os
+
 import pytest
 
-
 pytestmark = pytest.mark.skipif(
-    not os.getenv("PAYSTACK_TEST_KEY"),
-    reason="Set PAYSTACK_TEST_KEY to run integration tests"
+    not os.getenv("PAYSTACK_TEST_KEY"), reason="Set PAYSTACK_TEST_KEY to run integration tests"
 )
 
 

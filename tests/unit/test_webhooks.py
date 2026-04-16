@@ -1,16 +1,21 @@
 import hashlib
 import hmac
+
 import pytest
+
 from paystackpay import Paystack
 
 SECRET = "whsec_test_secret"
+
 
 @pytest.fixture
 def client():
     return Paystack(secret_key="sk_test_123")
 
+
 def make_signature(payload: bytes, secret: str) -> str:
     return hmac.new(secret.encode(), payload, hashlib.sha512).hexdigest()
+
 
 class TestWebhooks:
     def test_valid_signature_returns_true(self, client):

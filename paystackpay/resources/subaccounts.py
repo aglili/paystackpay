@@ -1,9 +1,22 @@
-from .._base import BaseResource, AsyncBaseResource
+from .._base import AsyncBaseResource, BaseResource
 
 
 class Subaccounts(BaseResource):
-    def create(self, business_name: str, settlement_bank: str, account_number: str, percentage_charge: float, **kwargs) -> dict:
-        data = {"business_name": business_name, "settlement_bank": settlement_bank, "account_number": account_number, "percentage_charge": percentage_charge, **kwargs}
+    def create(
+        self,
+        business_name: str,
+        settlement_bank: str,
+        account_number: str,
+        percentage_charge: float,
+        **kwargs,
+    ) -> dict:
+        data = {
+            "business_name": business_name,
+            "settlement_bank": settlement_bank,
+            "account_number": account_number,
+            "percentage_charge": percentage_charge,
+            **kwargs,
+        }
         return self._client.request("POST", "/subaccount", json=data)
 
     def list(self, **params) -> dict:
@@ -17,8 +30,21 @@ class Subaccounts(BaseResource):
 
 
 class AsyncSubaccounts(AsyncBaseResource):
-    async def create(self, business_name: str, settlement_bank: str, account_number: str, percentage_charge: float, **kwargs) -> dict:
-        data = {"business_name": business_name, "settlement_bank": settlement_bank, "account_number": account_number, "percentage_charge": percentage_charge, **kwargs}
+    async def create(
+        self,
+        business_name: str,
+        settlement_bank: str,
+        account_number: str,
+        percentage_charge: float,
+        **kwargs,
+    ) -> dict:
+        data = {
+            "business_name": business_name,
+            "settlement_bank": settlement_bank,
+            "account_number": account_number,
+            "percentage_charge": percentage_charge,
+            **kwargs,
+        }
         return await self._client.request("POST", "/subaccount", json=data)
 
     async def list(self, **params) -> dict:

@@ -1,7 +1,8 @@
-import pytest
 import httpx
+import pytest
 import respx
-from paystackpay import Paystack, AsyncPaystack
+
+from paystackpay import AsyncPaystack, Paystack
 
 BASE = "https://api.paystack.co"
 
@@ -20,9 +21,20 @@ class TestTransactions:
     def test_initialize(self, client):
         with respx.mock:
             respx.post(f"{BASE}/transaction/initialize").mock(
-                return_value=httpx.Response(200, json={"status": True, "data": {"authorization_url": "https://checkout.paystack.com/abc", "reference": "ref123"}})
+                return_value=httpx.Response(
+                    200,
+                    json={
+                        "status": True,
+                        "data": {
+                            "authorization_url": "https://checkout.paystack.com/abc",
+                            "reference": "ref123",
+                        },
+                    },
+                )
             )
-            result = client.transactions.initialize(email="test@example.com", amount=100.0, currency="GHS")
+            result = client.transactions.initialize(
+                email="test@example.com", amount=100.0, currency="GHS"
+            )
             assert result["status"] is True
             assert "authorization_url" in result["data"]
 
@@ -34,13 +46,16 @@ class TestTransactions:
             client.transactions.initialize(email="test@example.com", amount=100.0, currency="GHS")
             sent = route.calls[0].request
             import json
+
             body = json.loads(sent.content)
             assert body["amount"] == 10000
 
     def test_verify(self, client):
         with respx.mock:
             respx.get(f"{BASE}/transaction/verify/ref123").mock(
-                return_value=httpx.Response(200, json={"status": True, "data": {"status": "success"}})
+                return_value=httpx.Response(
+                    200, json={"status": True, "data": {"status": "success"}}
+                )
             )
             result = client.transactions.verify("ref123")
             assert result["status"] is True
@@ -114,6 +129,7 @@ class TestTransactions:
                 authorization_code="AUTH_abc", email="test@example.com", amount=20.0, currency="USD"
             )
             import json
+
             body = json.loads(route.calls[0].request.content)
             assert body["currency"] == "USD"
 
@@ -122,9 +138,17 @@ class TestAsyncTransactions:
     async def test_initialize(self, async_client):
         with respx.mock:
             respx.post(f"{BASE}/transaction/initialize").mock(
-                return_value=httpx.Response(200, json={"status": True, "data": {"authorization_url": "https://checkout.paystack.com/abc"}})
+                return_value=httpx.Response(
+                    200,
+                    json={
+                        "status": True,
+                        "data": {"authorization_url": "https://checkout.paystack.com/abc"},
+                    },
+                )
             )
-            result = await async_client.transactions.initialize(email="test@example.com", amount=100.0, currency="GHS")
+            result = await async_client.transactions.initialize(
+                email="test@example.com", amount=100.0, currency="GHS"
+            )
             assert result["status"] is True
         await async_client._client.close()
 

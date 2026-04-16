@@ -1,4 +1,4 @@
-from .._base import BaseResource, AsyncBaseResource
+from .._base import AsyncBaseResource, BaseResource
 
 
 class Customers(BaseResource):
@@ -12,7 +12,14 @@ class Customers(BaseResource):
     def fetch(self, email_or_code: str) -> dict:
         return self._client.request("GET", f"/customer/{email_or_code}")
 
-    def update(self, customer_code: str, first_name: str | None = None, last_name: str | None = None, email: str | None = None, phone: str | None = None) -> dict:
+    def update(
+        self,
+        customer_code: str,
+        first_name: str | None = None,
+        last_name: str | None = None,
+        email: str | None = None,
+        phone: str | None = None,
+    ) -> dict:
         data = {}
         if first_name is not None:
             data["first_name"] = first_name
@@ -33,7 +40,11 @@ class Customers(BaseResource):
         return self._client.request("POST", "/customer/set_risk_action", json=data)
 
     def deactivate_authorization(self, authorization_code: str) -> dict:
-        return self._client.request("POST", "/customer/deactivate_authorization", json={"authorization_code": authorization_code})
+        return self._client.request(
+            "POST",
+            "/customer/deactivate_authorization",
+            json={"authorization_code": authorization_code},
+        )
 
 
 class AsyncCustomers(AsyncBaseResource):
@@ -47,7 +58,14 @@ class AsyncCustomers(AsyncBaseResource):
     async def fetch(self, email_or_code: str) -> dict:
         return await self._client.request("GET", f"/customer/{email_or_code}")
 
-    async def update(self, customer_code: str, first_name: str | None = None, last_name: str | None = None, email: str | None = None, phone: str | None = None) -> dict:
+    async def update(
+        self,
+        customer_code: str,
+        first_name: str | None = None,
+        last_name: str | None = None,
+        email: str | None = None,
+        phone: str | None = None,
+    ) -> dict:
         data = {}
         if first_name is not None:
             data["first_name"] = first_name
@@ -68,4 +86,8 @@ class AsyncCustomers(AsyncBaseResource):
         return await self._client.request("POST", "/customer/set_risk_action", json=data)
 
     async def deactivate_authorization(self, authorization_code: str) -> dict:
-        return await self._client.request("POST", "/customer/deactivate_authorization", json={"authorization_code": authorization_code})
+        return await self._client.request(
+            "POST",
+            "/customer/deactivate_authorization",
+            json={"authorization_code": authorization_code},
+        )

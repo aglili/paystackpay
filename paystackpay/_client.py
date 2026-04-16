@@ -1,10 +1,11 @@
 import httpx
+
 from .errors import (
+    APIError,
     AuthenticationError,
     InvalidRequestError,
     NotFoundError,
     RateLimitError,
-    APIError,
 )
 
 _STATUS_MAP = {

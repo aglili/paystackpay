@@ -28,4 +28,3 @@ def validate_amount(amount: float) -> float:
     if amount < 0:
         raise InvalidRequestError("Amount must not be negative")
     return amount
-

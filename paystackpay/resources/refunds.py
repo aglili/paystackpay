@@ -1,9 +1,11 @@
-from .._base import BaseResource, AsyncBaseResource
+from .._base import AsyncBaseResource, BaseResource
 from ..utils import to_subunit
 
 
 class Refunds(BaseResource):
-    def create(self, transaction: str, amount: float | None = None, currency: str = "NGN", **kwargs) -> dict:
+    def create(
+        self, transaction: str, amount: float | None = None, currency: str = "NGN", **kwargs
+    ) -> dict:
         data: dict = {"transaction": transaction, **kwargs}
         if amount is not None:
             data["amount"] = to_subunit(amount, currency)
@@ -17,7 +19,9 @@ class Refunds(BaseResource):
 
 
 class AsyncRefunds(AsyncBaseResource):
-    async def create(self, transaction: str, amount: float | None = None, currency: str = "NGN", **kwargs) -> dict:
+    async def create(
+        self, transaction: str, amount: float | None = None, currency: str = "NGN", **kwargs
+    ) -> dict:
         data: dict = {"transaction": transaction, **kwargs}
         if amount is not None:
             data["amount"] = to_subunit(amount, currency)

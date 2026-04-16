@@ -1,10 +1,15 @@
-from .._base import BaseResource, AsyncBaseResource
+from .._base import AsyncBaseResource, BaseResource
 from ..utils import to_subunit
 
 
 class Transactions(BaseResource):
     def initialize(self, email: str, amount: float, currency: str = "NGN", **kwargs) -> dict:
-        data = {"email": email, "amount": to_subunit(amount, currency), "currency": currency, **kwargs}
+        data = {
+            "email": email,
+            "amount": to_subunit(amount, currency),
+            "currency": currency,
+            **kwargs,
+        }
         return self._client.request("POST", "/transaction/initialize", json=data)
 
     def verify(self, reference: str) -> dict:
@@ -50,7 +55,12 @@ class Transactions(BaseResource):
 
 class AsyncTransactions(AsyncBaseResource):
     async def initialize(self, email: str, amount: float, currency: str = "NGN", **kwargs) -> dict:
-        data = {"email": email, "amount": to_subunit(amount, currency), "currency": currency, **kwargs}
+        data = {
+            "email": email,
+            "amount": to_subunit(amount, currency),
+            "currency": currency,
+            **kwargs,
+        }
         return await self._client.request("POST", "/transaction/initialize", json=data)
 
     async def verify(self, reference: str) -> dict:

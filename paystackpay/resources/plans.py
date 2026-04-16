@@ -1,10 +1,15 @@
-from .._base import BaseResource, AsyncBaseResource
+from .._base import AsyncBaseResource, BaseResource
 from ..utils import to_subunit
 
 
 class Plans(BaseResource):
     def create(self, name: str, interval: str, amount: float, currency: str = "NGN") -> dict:
-        data = {"name": name, "interval": interval, "amount": to_subunit(amount, currency), "currency": currency}
+        data = {
+            "name": name,
+            "interval": interval,
+            "amount": to_subunit(amount, currency),
+            "currency": currency,
+        }
         return self._client.request("POST", "/plan", json=data)
 
     def list(self, **params) -> dict:
@@ -13,7 +18,14 @@ class Plans(BaseResource):
     def fetch(self, id_or_code: str) -> dict:
         return self._client.request("GET", f"/plan/{id_or_code}")
 
-    def update(self, id_or_code: str, name: str | None = None, interval: str | None = None, amount: float | None = None, currency: str = "NGN") -> dict:
+    def update(
+        self,
+        id_or_code: str,
+        name: str | None = None,
+        interval: str | None = None,
+        amount: float | None = None,
+        currency: str = "NGN",
+    ) -> dict:
         data = {}
         if name is not None:
             data["name"] = name
@@ -26,7 +38,12 @@ class Plans(BaseResource):
 
 class AsyncPlans(AsyncBaseResource):
     async def create(self, name: str, interval: str, amount: float, currency: str = "NGN") -> dict:
-        data = {"name": name, "interval": interval, "amount": to_subunit(amount, currency), "currency": currency}
+        data = {
+            "name": name,
+            "interval": interval,
+            "amount": to_subunit(amount, currency),
+            "currency": currency,
+        }
         return await self._client.request("POST", "/plan", json=data)
 
     async def list(self, **params) -> dict:
@@ -35,7 +52,14 @@ class AsyncPlans(AsyncBaseResource):
     async def fetch(self, id_or_code: str) -> dict:
         return await self._client.request("GET", f"/plan/{id_or_code}")
 
-    async def update(self, id_or_code: str, name: str | None = None, interval: str | None = None, amount: float | None = None, currency: str = "NGN") -> dict:
+    async def update(
+        self,
+        id_or_code: str,
+        name: str | None = None,
+        interval: str | None = None,
+        amount: float | None = None,
+        currency: str = "NGN",
+    ) -> dict:
         data = {}
         if name is not None:
             data["name"] = name

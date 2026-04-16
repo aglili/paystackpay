@@ -1,22 +1,21 @@
-from ._client import SyncClient, AsyncClient
-from ._base import BaseResource, AsyncBaseResource
+from ._client import AsyncClient, SyncClient
 from .errors import (
-    PaystackError,
+    APIError,
     AuthenticationError,
     InvalidRequestError,
-    NotFoundError,
-    RateLimitError,
-    APIError,
     MissingSecretKeyError,
+    NotFoundError,
+    PaystackError,
+    RateLimitError,
 )
-from .resources.transactions import Transactions, AsyncTransactions
-from .resources.customers import Customers, AsyncCustomers
-from .resources.plans import Plans, AsyncPlans
-from .resources.transfers import Transfers, AsyncTransfers
-from .resources.transfer_recipients import TransferRecipients, AsyncTransferRecipients
-from .resources.payment_requests import PaymentRequests, AsyncPaymentRequests
-from .resources.refunds import Refunds, AsyncRefunds
-from .resources.subaccounts import Subaccounts, AsyncSubaccounts
+from .resources.customers import AsyncCustomers, Customers
+from .resources.payment_requests import AsyncPaymentRequests, PaymentRequests
+from .resources.plans import AsyncPlans, Plans
+from .resources.refunds import AsyncRefunds, Refunds
+from .resources.subaccounts import AsyncSubaccounts, Subaccounts
+from .resources.transactions import AsyncTransactions, Transactions
+from .resources.transfer_recipients import AsyncTransferRecipients, TransferRecipients
+from .resources.transfers import AsyncTransfers, Transfers
 from .resources.webhooks import Webhooks
 
 __version__ = "1.0.0"

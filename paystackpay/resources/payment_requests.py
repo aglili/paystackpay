@@ -1,10 +1,18 @@
-from .._base import BaseResource, AsyncBaseResource
+from .._base import AsyncBaseResource, BaseResource
 from ..utils import to_subunit
 
 
 class PaymentRequests(BaseResource):
-    def create(self, customer: str, description: str, amount: float, currency: str = "NGN", **kwargs) -> dict:
-        data = {"customer": customer, "description": description, "amount": to_subunit(amount, currency), "currency": currency, **kwargs}
+    def create(
+        self, customer: str, description: str, amount: float, currency: str = "NGN", **kwargs
+    ) -> dict:
+        data = {
+            "customer": customer,
+            "description": description,
+            "amount": to_subunit(amount, currency),
+            "currency": currency,
+            **kwargs,
+        }
         return self._client.request("POST", "/paymentrequest", json=data)
 
     def fetch(self, id_or_code: str) -> dict:
@@ -21,8 +29,16 @@ class PaymentRequests(BaseResource):
 
 
 class AsyncPaymentRequests(AsyncBaseResource):
-    async def create(self, customer: str, description: str, amount: float, currency: str = "NGN", **kwargs) -> dict:
-        data = {"customer": customer, "description": description, "amount": to_subunit(amount, currency), "currency": currency, **kwargs}
+    async def create(
+        self, customer: str, description: str, amount: float, currency: str = "NGN", **kwargs
+    ) -> dict:
+        data = {
+            "customer": customer,
+            "description": description,
+            "amount": to_subunit(amount, currency),
+            "currency": currency,
+            **kwargs,
+        }
         return await self._client.request("POST", "/paymentrequest", json=data)
 
     async def fetch(self, id_or_code: str) -> dict:

@@ -33,4 +33,3 @@ class APIError(PaystackError):
 
 class MissingSecretKeyError(PaystackError):
     pass
-

@@ -37,6 +37,7 @@ dev = [
     "pytest-asyncio>=0.23",
     "respx>=0.21",
     "python-dotenv>=1.0",
+    "ruff>=0.4",
 ]
 
 [tool.setuptools.packages.find]
@@ -47,3 +48,17 @@ exclude = ["tests*"]
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests/unit"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["paystackpay"]
+
+[tool.ruff.format]
+quote-style = "double"
