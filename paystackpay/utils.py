@@ -1,16 +1,31 @@
-from .errors import InvalidDataErr
+from .errors import InvalidRequestError
 
-def validate_amount(amount):
-    if not amount:
-        raise InvalidDataErr("Amount Is Required")
-    
-    if isinstance(amount,int) or isinstance(amount,float):
-        if amount < 0:
-            raise InvalidDataErr("Amount Should Be Greater than Zero")
-        return amount
-    else:
-        raise InvalidDataErr("Amount Should be a number")
-        
+_SUBUNIT_MULTIPLIERS: dict[str, int] = {
+    "GHS": 100,
+    "NGN": 100,
+    "USD": 100,
+    "ZAR": 100,
+    "KES": 100,
+}
 
 
-    
+def to_subunit(amount: float, currency: str) -> int:
+    if amount is None:
+        raise InvalidRequestError("Amount is required")
+    if not isinstance(amount, (int, float)):
+        raise InvalidRequestError("Amount must be a number")
+    if amount < 0:
+        raise InvalidRequestError("Amount must not be negative")
+    multiplier = _SUBUNIT_MULTIPLIERS.get(currency.upper(), 100)
+    return int(amount * multiplier)
+
+
+def validate_amount(amount: float) -> float:
+    if amount is None:
+        raise InvalidRequestError("Amount is required")
+    if not isinstance(amount, (int, float)):
+        raise InvalidRequestError("Amount must be a number")
+    if amount < 0:
+        raise InvalidRequestError("Amount must not be negative")
+    return amount
+
